@@ -1,29 +1,25 @@
-# Mikroserwis RestAPI do sprawdzenia informacji o firmie
+# Ponton
+## Aplikacja webowa zawierająca mechanizm równoważący ruch na serwerach wraz z interfejsem do jego kongiguracji
 
-autor: Tomasz Wiśniewski
+**Aplikacja powstała w ramach wykonania pracy inżynierskiej**
 
-Program korzysta z API dostępnego pod adresem https://wl-api.mf.gov.pl/api/.
+Autor: Tomasz Wiśniewski
+
+Kierunek: Inżynieria Systemów
+
+Specjalność: Sieciowe Systemy Usługowe
+
+Uczelnia: Politechnika Wrocławska
+
+Rok: 2020
 
 **Instrukcja instalacji:**
 
-1. Sklonuj repozytorium za pomocą polecenia: `$git clone https://github.com/Wisnia44/checkcompanyinfo.git`;
-2. Przejdź do katalogu checkcompanyinfo: `$cd checkcompanyinfo`;
-3. Upewnij się, że jesteś w katalogu checkcompanyinfo: `$pwd`;
-4. Zbuduj obraz dockera: `$docker build -t checkcompanyinfo .`;
-5. Uruchom kontener: `$docker-compose up`;
-6. Serwer jest uruchomiony!
+1. Sklonuj repozytorium za pomocą polecenia: `$git clone https://github.com/Wisnia44/ponton.git`;
+2. Przejdź do katalogu ponton: `$cd ponton`;
+3. Zbuduj obraz dockera: `$docker build -t ponton .`;
+4. Uruchom kontener: `$docker-compose up`;
+5. Serwer jest uruchomiony!
 
 
 **Instrukcja użycia:**
-
-Pod adres `http://0.0.0.0:33303/check/{nr nip}` wysyłamy zapytanie metodą GET.
-
-W odpowiedzi powinniśmy dostać podobnego jsona:
-
-```
-{
-    "regon": "930959027",
-    "krs": "0000305240",
-    "name": "ARTIM SAFETY KRZYSZTOF NIEŚCIOR SPÓŁKA JAWNA"
-}
-```
