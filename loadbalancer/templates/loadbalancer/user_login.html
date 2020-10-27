@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+	
+	<header>
+		<h1 class="title">Ponton</h1>
+	</header>
+	
+
+	<section class="log-in-form">
+		<h4 class="description">Zaloguj się</h4>
+		<br/>
+
+		<form class="create-account" method="POST">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<input type="submit" value="Zaloguj się" class="btn btn-success">
+			<br/><br/>
+
+			<small>
+				<p><a href="{% url 'signup' %}">Nie masz konta? Zarejestruj się</a></p>
+			</small>
+		</form>
+	</section>
+
+  
+
+{% endblock %}

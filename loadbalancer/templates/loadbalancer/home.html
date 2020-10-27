@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<header>
+		<h1 class="title">Ponton</h1>
+	</header>
+
+	<section class="menu">
+		<ul class="list-group">
+			<li><a class="list-group-item list-group-item-action" 
+				href="{% url 'user-update' %}">Zmień swoje dane</a></li>
+			<li><a class="list-group-item list-group-item-action" 
+				href="{% url 'change-password' %}">Zmień hasło</a></li>
+			<li><a class="list-group-item list-group-item-action" 
+				href="{% url 'user-delete' %}">Usuń swoje konto</a></li>
+		</ul>
+	</section>
+
+	<br/>
+	<form class="logout-link" action="{% url 'user-logout' %}" method="post">
+		{% csrf_token %}
+		<button class="btn btn-outline-dark" type="submit">Wyloguj się</button>
+	</form>
+{% endblock %}
