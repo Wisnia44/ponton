@@ -11,16 +11,7 @@
 </head>
 
 <body class="body">
-	
-	<div id="auth-check">
-		{% if user.is_authenticated %}
-			<p>Cześć, {{ user.username }}. Dzięki, że się zalogowałeś!</p>
-		{% else %}
-			<p>Cześć, zaloguj się lub utwórz konto!</p>
-		{% endif %}
-	</div>
-
-  	{% block content %}
+	 	{% block content %}
   		template nie zaladowany
 	{% endblock %}
 </body>

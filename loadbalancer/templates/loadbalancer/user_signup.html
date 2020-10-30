@@ -2,7 +2,6 @@
 
 {% block content %}
 
-
 	<header>
 		<h1 class="title">Ponton</h1>
 	</header>
@@ -11,7 +10,6 @@
 	<form class="create-account log-in-form " method="POST">
 
 		<h4 class="description">Zarejestruj się</h4>
-		<br/>
 
 		{% csrf_token %}
 		{{ form.as_p }}

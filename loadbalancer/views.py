@@ -32,7 +32,7 @@ class UserLoginView (View):
 			login(request, user)
 			return redirect('home')
 		else:
-			return redirect('welcome')
+			return redirect('home')
 	def get (self, request, *args, **kwargs):
 		form = AuthenticationForm()
 		return render(request, self.template_name, {'form': form})
@@ -40,7 +40,7 @@ class UserLoginView (View):
 class UserLogoutView (View):
 	def post (self, request, *args, **kwargs):
 		logout(request)
-		return redirect('welcome')
+		return redirect('home')
 
 class UserUpdateView (View):
 	template_name = 'loadbalancer/user_update.html'
@@ -68,7 +68,7 @@ class UserDeleteView (DeleteView):
 	def post(self, request, *args, **kwargs):
 		user = User.objects.get(pk=request.user.pk)
 		user.delete()
-		return redirect('welcome') 
+		return redirect('home') 
 
 class UserSignupView (View):
 	template_name = 'loadbalancer/user_signup.html'
@@ -102,22 +102,7 @@ class UserChangePassword(View):
 
 
 #Main views
-class WelcomeView (View):
-	template_name = 'loadbalancer/welcome.html'
-	def get(self, request, *args, **kwargs):
-		return render(request, self.template_name)
-
 class HomeView (View):
 	template_name = 'loadbalancer/home.html'
 	def get(self, request, *args, **kwargs):
 		return render(request, self.template_name, {})
-
-class AnonymousUserView (View):
-	template_name = 'loadbalancer/anonymous_user.html'
-	def get(self, request, *args, **kwargs):
-		return render(request, self.template_name)
-
-class NotOwnerView (View):
-	template_name = 'loadbalancer/not_owner.html'
-	def get(self, request, *args, **kwargs):
-		return render(request, self.template_name)

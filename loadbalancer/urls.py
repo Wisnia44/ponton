@@ -1,4 +1,6 @@
-from django.urls import path
+from django.urls import path, include
+from django.conf.urls import url
+from django.contrib.auth import views as auth_views
 
 from .views import (
     #User based views
@@ -11,14 +13,11 @@ from .views import (
 
     #Main views
     HomeView,
-    WelcomeView,
-    AnonymousUserView,
-    NotOwnerView,
 )
 
 #app_name = 'loadbalancer'
 urlpatterns = [
-    #User based views
+    # User based views
     path('login/', UserLoginView.as_view(), name='user-login'),
     path('logout/', UserLogoutView.as_view(), name='user-logout'),
     path('signup/', UserSignupView.as_view(), name='signup'),
@@ -26,9 +25,10 @@ urlpatterns = [
     path('user-delete/', UserDeleteView.as_view(), name='user-delete'),
     path('user-change-password/', UserChangePassword.as_view(), name='change-password'),
 
-    #Main views
-    path('', WelcomeView.as_view(), name='welcome'),
+    # Main views
     path('home/', HomeView.as_view(), name='home'),
-    path('anonymous-user/', AnonymousUserView.as_view(), name='anonymous-user'),
-    path('not-owner/', NotOwnerView.as_view(), name='not-owner'),
+    path('', HomeView.as_view(), name='index'),
+
+    # Default views
+    url('^', include('django.contrib.auth.urls')),
 ]
