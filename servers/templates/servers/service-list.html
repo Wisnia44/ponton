@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for service in object_list %}
+	<p>{{ service.name }}</p>
+{% endfor %}
+
+<br/>
+<a class="btn btn-outline-secondary" href="#" onclick="javascript:window.history.back(-1);return false;">
+	Powrót
+</a>
+
+{% endblock %}
