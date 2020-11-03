@@ -19,15 +19,15 @@ urlpatterns = [
 	# service based views
     path('service/create/', ServiceCreateView.as_view(), name='service-create'),
     path('service/<int:pk>/', ServiceDetailView.as_view(), name='service'),
-    path('service/<int:pk>/update', ServiceUpdateView.as_view(), name='service-update'),
-    path('service/<int:pk>/delete', ServiceDeleteView.as_view(), name='service-delete'),
+    path('service/<int:pk>/update/', ServiceUpdateView.as_view(), name='service-update'),
+    path('service/<int:pk>/delete/', ServiceDeleteView.as_view(), name='service-delete'),
     path('services/', ServiceListView.as_view(), name='service-list'),
 
     # server based views
-    path('server/create/', ServerCreateView.as_view(), name='server-create'),
-    path('server/<int:pk>/', ServerDetailView.as_view(), name='server'),
-    path('server/<int:pk>/update', ServerUpdateView.as_view(), name='server-update'),
-    path('server/<int:pk>/delete', ServerDeleteView.as_view(), name='server-delete'),
+    path('service/<int:pk>/server/create/', ServerCreateView.as_view(), name='server-create'),
+    path('service/<int:pk1>/server/<int:pk2>/', ServerDetailView.as_view(), name='server'),
+    path('service/<int:pk1>/server/<int:pk2>/update/', ServerUpdateView.as_view(), name='server-update'),
+    path('service/<int:pk1>/server/<int:pk2>/delete/', ServerDeleteView.as_view(), name='server-delete'),
     path('service/<int:pk>/servers/', ServerListView.as_view(), name='server-list'),
     
     # api view

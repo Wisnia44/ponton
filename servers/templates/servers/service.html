@@ -6,4 +6,12 @@
 <h5> Nazwa: {{ object.name }} </h5>
 <p> Algorytm: {{object.algorithm}} </p>
 
+<p><a href="{% url 'service-update' pk=object.id %}">Edytuj</a></p>
+<p><a href="{% url 'service-delete' pk=object.id %}">Usuń</a></p>
+<p><a href="{% url 'server-list' pk=object.id %}">Serwery usługi</a></p>
+
+<a class="btn btn-outline-secondary" href="#" onclick="javascript:window.history.back(-1);return false;">
+	Powrót
+</a>
+
 {% endblock %}

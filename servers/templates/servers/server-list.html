@@ -3,7 +3,11 @@
 {% block content %}
 
 {% for server in object_list %}
-	<p>{{ server.name }}</p>
+	<p>{{server.id}} - {{ server.address }}
+		<a href="{% url 'server' pk1=server.service.id pk2=server.id %}">Pokaż</a>
+		<a href="{% url 'server-update' pk1=server.service.id pk2=server.id %}">Edytuj</a>
+		<a href="{% url 'server-delete' pk1=server.service.id pk2=server.id %}">Usuń</a>
+	</p>
 {% endfor %}
 
 <br/>
