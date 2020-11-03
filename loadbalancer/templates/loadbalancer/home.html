@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<header>
+		<h1 class="title">Ponton</h1>
+	</header>
+
+	{% if user.is_authenticated %}
+			<p>Cześć, {{ user.username }}. Dzięki, że się zalogowałeś!</p>
+			<section class="menu">
+				<ul class="list-group">
+				<li><a class="list-group-item list-group-item-action" 
+				href="{% url 'user-update' %}">Zmień swoje dane</a></li>
+				<li><a class="list-group-item list-group-item-action" 
+				href="{% url 'user-delete' %}">Usuń swoje konto</a></li>
+				<li><a class="list-group-item list-group-item-action" 
+				href="{% url 'change-password' %}">Zmień swoje hasło</a></li>
+				<li><form class="logout-link" action="{% url 'user-logout' %}" method="post">
+					{% csrf_token %}
+					<button class="btn btn-outline-dark" type="submit">Wyloguj się</button>
+					</form></li>
+				</ul>
+			</section>
+			
+	{% else %}
+			<section id="auth-section" class="container-fluid">
+				<h5>
+					<a href="{% url 'user-login' %}">
+						<button type="button" name="button" class="btn btn-primary btn-lg">Zaloguj się</button>
+					</a>
+				</h5>
+				<p><a href="{% url 'signup' %}">Nie masz konta? Zarejestruj się</a></p>
+			</section>
+			<footer class="footer text-left">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm">
+							<h4 class="font-weight-normal">Jak to działa?</h4>
+							<p class="font-weight-light">{% lorem 3 %}</p>
+						</div>
+						<div class="col-sm">
+							<h4 class="font-weight-normal">O mnie:</h4>
+							<p class="font-weight-light">{% lorem 1 %}</p>
+						</div>
+					</div>
+				</div>
+			</footer>
+	{% endif %}
+
+{% endblock %}
