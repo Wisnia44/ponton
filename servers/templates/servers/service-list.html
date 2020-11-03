@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for service in object_list %}
+	<p>{{ service.id }} - {{ service.name }} 
+		<a href="{% url 'service' pk=service.id %}">Pokaż</a>
+		<a href="{% url 'service-update' pk=service.id %}">Edytuj</a>
+		<a href="{% url 'service-delete' pk=service.id %}">Usuń</a>
+	</p>
+{% endfor %}
+<p><a href="{% url 'service-create' %}">Dodaj nową</a></p>
+
+<br/>
+<a class="btn btn-outline-secondary" href="#" onclick="javascript:window.history.back(-1);return false;">
+	Powrót
+</a>
+
+{% endblock %}
