@@ -29,17 +29,15 @@ class Server(models.Model):
 	address = models.CharField(max_length=15)
 	service = models.ForeignKey(Service, on_delete=models.CASCADE)
 	cpu_state = models.FloatField(default=0.5)
-	ping_interval = models.IntegerField(default=300)
-	last_time_checked = models.DateTimeField(default=None, null=True)
-	status_choices =[
-		('ready','ready'),
-		('not_responding', 'not_responding'),
-		('no_cpu_state', 'no_cpu_state'),
+	ping_time = models.FloatField(default=9999.0)
+	analysis_method_choices =[
+		('ping','ping'),
+		('cpu', 'cpu'),
 		]
-	status = models.CharField(
-		max_length=20, 
-		choices=status_choices, 
-		default='ready'
+	analysis_method = models.CharField(
+		max_length=4, 
+		choices=analysis_method_choices, 
+		default='ping'
 		)
 
 	def get_owner(self):
