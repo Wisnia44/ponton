@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'loadbalancer',
     'servers',
 
+    'django_crontab',
+    'rest_framework',
+
     'django.contrib.admin',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -131,10 +134,27 @@ STATIC_URL = '/static/'
 
 # Email settings
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # During development only
-
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'app.ponton@gmail.com'
 EMAIL_HOST_PASSWORD = 'Kb8Z7Wqd9ssZrFV'
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'Ponton Team <app.ponton@gmail.com>'
+
+# Cron settings. Crons provided by django-crontab
+TIME_ZONE = 'UTC'
+CRONJOBS = [
+    ('* * * * *', 'servers.ping_servers'),
+]
+
+# Django rest framework settings
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+}

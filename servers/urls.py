@@ -1,4 +1,5 @@
-from django.urls import path
+from django.urls import path, include
+from django.conf.urls import url
 from .views import (
 	# service based views
 	ServiceCreateView,
@@ -32,4 +33,5 @@ urlpatterns = [
     
     # api view
     #path('service/<int:pk>/api', ServiceApiView.as_view(), name='service-api'),
+    url(r'^api/servers/', include('servers.api.urls', namespace='api')),
 ]
