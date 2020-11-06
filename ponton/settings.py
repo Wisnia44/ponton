@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'loadbalancer',
     'servers',
 
+    'django_crontab',
+    'rest_framework',
+
     'django.contrib.admin',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -138,3 +141,19 @@ EMAIL_HOST_USER = 'SMTP_Injection'
 EMAIL_HOST_PASSWORD = '2a59c430fc21ad40dc50e7da69fd9336b460bc1c'
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'Ponton Team <ponton@twisniewski.tk>'
+
+# Cron settings. Crons provided by django-crontab
+CRONJOBS = [
+    ('*/5 * * * *', 'servers.check_server_status'),
+]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+}
