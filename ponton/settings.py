@@ -132,9 +132,9 @@ STATIC_URL = '/static/'
 # Email settings
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # During development only
 
-EMAIL_HOST = 'smtp.sparkpostmail.com'
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'SMTP_Injection'
-EMAIL_HOST_PASSWORD = '2a59c430fc21ad40dc50e7da69fd9336b460bc1c'
+EMAIL_HOST_USER = 'app.ponton@gmail.com'
+EMAIL_HOST_PASSWORD = 'Kb8Z7Wqd9ssZrFV'
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'Ponton Team <ponton@twisniewski.tk>'
+DEFAULT_FROM_EMAIL = 'Ponton Team <app.ponton@gmail.com>'
