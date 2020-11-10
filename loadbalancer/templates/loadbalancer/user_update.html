@@ -2,19 +2,11 @@
 
 {% block content %}
 
-
-	<header>
-		<h1 class="title">Ponton</h1>
-	</header>
-
 	<form class="log-in-form" method="POST">
-
-		<h5 class="description">Podaj nowe dane</h5>
-		<br/>
+		<h4 class="description">Podaj nowe dane</h4>
 		{% csrf_token %}
 		{{ form.as_p }}
 		<input type="submit" value="Uaktualnij dane" class="btn btn-success">
 	</form>
-	<a class="btn btn-outline-secondary" href="#" onclick="javascript:window.history.back(-1);return false;">Powrót</a>
 
 {% endblock %} 
