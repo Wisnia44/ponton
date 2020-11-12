@@ -15,5 +15,9 @@
 			</div>
 		</form>
 	</section>
+	<div class="btn-group" role="group">
+		<a class="nav-link" href="{% url 'service' pk=service.id %}"><button class="btn btn-outline-dark" type="submit">Powrót do usługi</button></a>
+		<a class="nav-link" href="{% url 'service-list'  %}"><button class="btn btn-outline-dark" type="submit">Powrót do listy usług</button></a>
+	</div>
 
 {% endblock %}

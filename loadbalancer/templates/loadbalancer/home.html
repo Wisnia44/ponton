@@ -3,6 +3,9 @@
 {% block content %}
 
 	{% if user.is_authenticated %}
+		<h4>Witamy w aplikacji Ponton</h4>
+		<p>Aplikacja webowa do konfiguracji mechanizmu równoważenia obciążenia</p>
+		<p class="font-weight-light">{% lorem 2 %}</p>
 	{% else %}
 		<footer class="footer text-left">
 			<div class="container">

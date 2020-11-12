@@ -15,5 +15,9 @@
 			</div>
 		</form>
 	</section>
+	<div class="btn-group" role="group">
+		<a class="nav-link" href="{% url 'server' pk1=server.service.id pk2=server.id %}"><button class="btn btn-outline-dark" type="submit">Powrót do serweru</button></a>
+		<a class="nav-link" href="{% url 'server-list' pk=server.service.id %}"><button class="btn btn-outline-dark" type="submit">Powrót do listy serwerów</button></a>
+	</div>
 
 {% endblock %}

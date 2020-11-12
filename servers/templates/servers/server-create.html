@@ -7,5 +7,6 @@
 		{{ form.as_p }}
 		<button class="btn btn-outline-success" type="submit">Zapisz</button>
 	</form>
+	<a class="nav-link" href="{% url 'server-list' pk=service.id %}"><button class="btn btn-outline-dark" type="submit">Powrót do listy serwerów</button></a>
 	
 {% endblock %}

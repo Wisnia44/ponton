@@ -10,6 +10,7 @@ from .views import (
     UserDeleteView,
     UserUpdateView,
     UserChangePassword,
+    UserUnloggedView,
 
     #Main views
     HomeView,
@@ -24,6 +25,7 @@ urlpatterns = [
     path('user-update/', UserUpdateView.as_view(), name='user-update'),
     path('user-delete/', UserDeleteView.as_view(), name='user-delete'),
     path('user-change-password/', UserChangePassword.as_view(), name='change-password'),
+    path('unlogged/', UserUnloggedView.as_view(), name='unlogged'),
 
     # Main views
     path('home/', HomeView.as_view(), name='home'),

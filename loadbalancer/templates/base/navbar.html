@@ -25,7 +25,11 @@
           </div>
         </li>
       </ul>
-      <div class="ml-auto">
+      <div class='ml-auto'>
+        <img src="{% static 'images/user1.png' %}" width="25" height="25" class="d-inline-block align-top" alt="" loading="lazy">
+        {{ user.username}}
+      </div>
+      <div class="ml-3">
         <form class="logout-link" action="{% url 'user-logout' %}" method="post">
           {% csrf_token %}
           <button class="btn btn-outline-dark" type="submit">Wyloguj się</button>

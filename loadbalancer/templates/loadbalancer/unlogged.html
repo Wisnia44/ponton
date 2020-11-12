@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+	<h4>Nieudane logowanie</h4>
+	<p>Aby uzyskać dostęp do aplikacji musisz się zalogować</p>
+	<div class="btn-group" role="group">
+		<a class="nav-link" href="{% url 'signup' %}"><button class="btn btn-outline-secondary" type="submit">Zarejestruj się</button></a>
+    	<a class="nav-link" href="{% url 'user-login' %}"><button class="btn btn-outline-primary" type="submit">Zaloguj się</button></a>
+    </div>
+
+{% endblock %}

@@ -32,7 +32,7 @@ class UserLoginView (View):
 			login(request, user)
 			return redirect('home')
 		else:
-			return redirect('home')
+			return redirect('unlogged')
 	def get (self, request, *args, **kwargs):
 		form = AuthenticationForm()
 		return render(request, self.template_name, {'form': form})
@@ -82,7 +82,7 @@ class UserSignupView (View):
 			login(request, user)
 			return redirect('home')
 		else:
-			raise ValidationError("Spróbuj jeszcze raz")
+			return redirect('unlogged')
 
 	def get (self, request, *args, **kwargs):
 		form = UserCreationForm()
@@ -100,6 +100,10 @@ class UserChangePassword(View):
 		form = PasswordChangeForm(request.user)
 		return render(request, self.template_name, {'form': form})
 
+class UserUnloggedView(View):
+	template_name = 'loadbalancer/unlogged.html'
+	def get(self, request, *args, **kwargs):
+		return render(request, self.template_name, {})
 
 #Main views
 class HomeView (View):

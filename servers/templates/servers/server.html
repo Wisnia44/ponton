@@ -16,5 +16,6 @@
 			<a class="{% url 'server-delete' pk1=object.service.id pk2=object.id %}"><button class="btn btn-outline-dark" type="submit">Usuń</button></a>
 		</div>
 	</div>
+	<a class="nav-link" href="{% url 'server-list' pk=object.service.id %}"><button class="btn btn-outline-dark" type="submit">Powrót do listy serwerów</button></a>
 
 {% endblock %}

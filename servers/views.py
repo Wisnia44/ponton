@@ -22,7 +22,7 @@ class ServiceCreateView(CreateView):
 		return render(request, self.template_name, {'form': form})
 
 	def get_success_url(self):
-		return reverse('home')
+		return reverse('service-list')
 
 	def form_valid(self, form):
 		form.instance.owner = self.request.user
@@ -38,13 +38,18 @@ class ServiceDetailView(DetailView):
 class ServiceUpdateView(UpdateView):
 	template_name = 'servers/service-update.html'
 	queryset = Service.objects.all()
+	form_class = ServiceModelForm
 
 	def get (self, request, *args, **kwargs):
 		form = ServiceModelForm()
-		return render(request, self.template_name, {'form': form})
+		service = Service.objects.get(pk=self.kwargs['pk'])
+		return render(request, self.template_name, {'form': form, 'service':service})
 
 	def get_success_url(self):
-		return reverse('home')
+		return reverse('service-list')
+
+	def get_object(self):
+		return Service.objects.get(pk=self.kwargs['pk'])
 
 class ServiceDeleteView(DeleteView):
 	template_name = 'servers/service-delete.html'
@@ -52,10 +57,11 @@ class ServiceDeleteView(DeleteView):
 
 	def get (self, request, *args, **kwargs):
 		form = ServiceModelForm()
-		return render(request, self.template_name, {'form': form})
+		service = Service.objects.get(pk=self.kwargs['pk'])
+		return render(request, self.template_name, {'form': form, 'service':service})
 
 	def get_success_url(self):
-		return reverse('home')
+		return reverse('service-list')
 
 class ServiceListView(ListView):
 	template_name = 'servers/service-list.html'
@@ -77,10 +83,11 @@ class ServerCreateView(CreateView):
 
 	def get (self, request, *args, **kwargs):
 		form = ServerModelForm()
-		return render(request, self.template_name, {'form': form})
+		service = Service.objects.get(pk=self.kwargs['pk'])
+		return render(request, self.template_name, {'form': form, 'service':service})
 
 	def get_success_url(self):
-		return reverse('home')
+		return reverse('server-list', kwargs={'pk':self.kwargs['pk']})
 
 	def form_valid(self, form):
 		form.instance.service = Service.objects.get(pk=self.kwargs['pk'])
@@ -102,10 +109,11 @@ class ServerUpdateView(UpdateView):
 
 	def get (self, request, *args, **kwargs):
 		form = ServerModelForm()
-		return render(request, self.template_name, {'form': form})
+		server = Server.objects.get(pk=kwargs['pk2'])
+		return render(request, self.template_name, {'form': form, 'server':server})
 
 	def get_success_url(self):
-		return reverse('home')
+		return reverse('server-list', kwargs={'pk':self.kwargs['pk1']})
 
 	def get_object(self):
 		return Server.objects.get(pk=self.kwargs['pk2'])
@@ -116,10 +124,11 @@ class ServerDeleteView(DeleteView):
 
 	def get (self, request, *args, **kwargs):
 		form = ServerModelForm()
-		return render(request, self.template_name, {'form': form})
+		server = Server.objects.get(pk=kwargs['pk2'])
+		return render(request, self.template_name, {'form': form, 'server':server})
 
 	def get_success_url(self):
-		return reverse('home')
+		return reverse('server-list', kwargs={'pk':self.kwargs['pk1']})
 
 	def get_object(self):
 		return Server.objects.get(pk=self.kwargs['pk2'])
