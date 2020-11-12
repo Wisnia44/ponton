@@ -15,4 +15,11 @@
 	Powrót
 </a>
 
+	<h4 class="description">Serwer</h4>
+	<h5> Adres: {{ object.address }} </h5>
+	<p>
+		<a href="{% url 'server-update' pk1=object.service.id pk2=object.id %}">Edytuj</a>
+		<a href="{% url 'server-delete' pk1=object.service.id pk2=object.id %}">Usuń</a>
+	</p>
+
 {% endblock %}

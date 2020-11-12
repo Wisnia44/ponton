@@ -3,16 +3,41 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  {% include 'base/css.html' %}
   <title>Ponton web app</title>
   <meta name="description" content="Load balancer web app">
   <meta name="author" content="Tomasz Wiśniewski">
-	
 </head>
 
 <body class="body">
-	 	{% block content %}
-  		template nie zaladowany
-	{% endblock %}
+	{% include 'base/navbar.html' %}
+
+	<div class="container min-vh-100">
+		{% block content %}
+  			template nie załadowany
+		{% endblock %}
+	</div>
+
+  <div class="footer bg-light pt-3 mt-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <p><small>Autor: <b>Tomasz Wiśniewski</b></small></p>
+          <p><small>Aplikacja wykonana w ramach realizacji pracy inżynierskiej</small></p>
+          <p><small>Rok: 2020</small></p>
+        </div>
+        <div class="col-12 col-md-6">
+          <p><small>Uczelnia: <b>Politechnika Wrocławska</b></small></p>
+          <p><small>Kierunek: Inżynieria Systemów</small></p>
+          <p><small>Specjalność: Sieciowe Systemy Usługowe</small></p>
+        </div>
+      </div>
+      
+      
+    </div>
+  </div>
+
+	{% include 'base/js.html' %}
 </body>
 </html> 
