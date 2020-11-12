@@ -1,14 +1,33 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-	{% for service in object_list %}
-		<p>{{ service.id }} - {{ service.name }} 
-			<a href="{% url 'service' pk=service.id %}">Pokaż</a>
-			<a href="{% url 'service-update' pk=service.id %}">Edytuj</a>
-			<a href="{% url 'service-delete' pk=service.id %}">Usuń</a>
-		</p>
-	{% endfor %}
-	<p><a href="{% url 'service-create' %}">Dodaj nową</a></p>
+	
+	<div class="row">
+		<div class="col-12 col-md-6">
+			<h4>Twoje usługi</h4>
+		</div>
+		<div class="col-12 col-md-4 col-lg-2 ml-lg-auto">
+			<a class="nav-link" href="{% url 'service-create' %}"><button class="btn btn-outline-primary" type="submit">Dodaj nową</button></a>
+		</div>
+	</div>
+	<ul class="list-group list-group-flush">
+		{% for service in object_list %}
+			<li class="list-group-item">
+				<div class="row">
+					<div class="col-12 col-md-5 my-auto">
+						<a class="text-dark" href="{% url 'service' pk=service.id %}">{{service.name}}</a>
+					</div>
+					<div class="col-7">
+						<div class="btn-group" role="group" aria-label="Basic example">
+							<a class="nav-link" href="{% url 'service' pk=service.id %}"><button class="btn btn-outline-primary" type="submit">Pokaż</button></a>
+							<a class="nav-link" href="{% url 'server-list' pk=service.id %}"><button class="btn btn-outline-dark" type="submit">Serwery</button></a>
+							<a class="nav-link" href="{% url 'service-update' pk=service.id %}"><button class="btn btn-outline-dark" type="submit">Edytuj</button></a>
+							<a class="nav-link" href="{% url 'service-delete' pk=service.id %}"><button class="btn btn-outline-dark" type="submit">Usuń</button></a>
+						</div>
+					</div>
+				</div>
+			</li>
+		{% endfor %}
+	</ul>
 
 {% endblock %}

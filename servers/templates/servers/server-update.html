@@ -5,7 +5,7 @@
 	<h4 class="description">Zmiana parametrów serwera</h4>
 	<form id="server-change" action='.' method='POST'>{% csrf_token %}
 		{{ form.as_p }}
-		<input type='submit' value='Zapisz' />
+		<button class="btn btn-outline-success" type="submit">Zapisz</button>
 	</form>
 
 {% endblock %}

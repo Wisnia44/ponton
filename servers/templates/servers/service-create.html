@@ -2,12 +2,11 @@
 
 {% block content %}
 
-	<section style="margin-top: 5%;">
-		<form action='.' method='POST'>{% csrf_token %}	
-			<h4>Podaj szczegóły nowej usługi:</h4>
-			{{ form.as_p }}
-			<input class="btn btn-success" type='submit' value='Zapisz' />
-		</form>
-	</section>
+	<h4>Podaj szczegóły nowej usługi</h4>
+	<form action='.' method='POST'>{% csrf_token %}	
+			
+		{{ form.as_p }}
+		<input class="btn btn-outline-success" type='submit' value='Zapisz' />
+	</form>
 	
 {% endblock %}
