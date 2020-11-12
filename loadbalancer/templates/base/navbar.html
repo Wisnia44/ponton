@@ -1,0 +1,55 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+<div class='container'>
+  <a class="navbar-brand" href="{% url 'home' %}">
+    <img src="{% static 'images/logo.png' %}" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+    Ponton
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      {% if user.is_authenticated %}
+        <li class="nav-item my-auto">
+          <a class="nav-link active" href="{% url 'service-list' %}">Twoje usługi</a>
+        </li>
+        <li class="nav-item dropdown active my-auto">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ustawienia konta</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{% url 'user-update' %}">Zmień swoje dane</a>
+            <a class="dropdown-item" href="{% url 'change-password' %}">Zmień swoje hasło</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'user-delete' %}">Usuń konto</a>
+          </div>
+        </li>
+      </ul>
+      <div class="ml-auto">
+        <form class="logout-link" action="{% url 'user-logout' %}" method="post">
+          {% csrf_token %}
+          <button class="btn btn-outline-dark" type="submit">Wyloguj się</button>
+        </form> 
+      </div>
+      {% else %}
+        <li class="nav-item my-auto">
+          <a class="nav-link disabled" href="#">Twoje usługi</a>
+        </li>
+        <li class="nav-item dropdown disabled my-auto">
+          <a class="nav-link dropdown-toggle disabled" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ustawienia konta</a>
+        </li>
+      </ul>
+      <div class="ml-auto">
+        <a class="nav-link" href="{% url 'signup' %}"><button class="btn btn-outline-secondary" type="submit">Zarejestruj się</button></a>
+      </div>
+      <div>
+        <a class="nav-link" href="{% url 'user-login' %}"><button class="btn btn-outline-primary" type="submit">Zaloguj się</button></a>
+      </div>
+      {% endif %}
+    <!--<form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>-->
+  </div>
+</div>
+</nav>

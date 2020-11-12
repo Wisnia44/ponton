@@ -2,17 +2,19 @@
 
 {% block content %}
 
-<h4 class="description">Serwer</h4>
-<h5> Adres: {{ object.address }} </h5>
-<p>
-	<a href="{% url 'server-update' pk1=object.service.id pk2=object.id %}">Edytuj</a>
-	<a href="{% url 'server-delete' pk1=object.service.id pk2=object.id %}">Usuń</a>
-</p>
+	<h4 class="description">Serwer {{object.address}} </h5>
+	<p> ID: {{object.id}} </p>
+	<p> Metoda analizowania obciążenia: {{object.analysis_method}} </p>
+	<p> Obciążenie serwera: {{object.cpu_state}} </p>
+	<p> Czas ping: {{object.ping_time}} </p>
 
-<a href="{% url 'server-create'%}">Usuń</a>
-
-<a class="btn btn-outline-secondary" href="#" onclick="javascript:window.history.back(-1);return false;">
-	Powrót
-</a>
+	<div class="row">
+		<div class="col-2 my-auto">
+			<a class="nav-link" href="{% url 'server-update' pk1=object.service.id pk2=object.id %}"><button class="btn btn-outline-dark" type="submit">Edytuj</button></a>
+		</div>
+		<div class="col-2 my-auto">
+			<a class="{% url 'server-delete' pk1=object.service.id pk2=object.id %}"><button class="btn btn-outline-dark" type="submit">Usuń</button></a>
+		</div>
+	</div>
 
 {% endblock %}

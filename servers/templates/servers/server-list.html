@@ -1,20 +1,32 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h5> Usługa {{service.name}}</h5>
-{% for server in object_list %}
-	<p>{{server.id}} - {{ server.address }}
-		<a href="{% url 'server' pk1=server.service.id pk2=server.id %}">Pokaż</a>
-		<a href="{% url 'server-update' pk1=server.service.id pk2=server.id %}">Edytuj</a>
-		<a href="{% url 'server-delete' pk1=server.service.id pk2=server.id %}">Usuń</a>
-	</p>
-{% endfor %}
 
-<p><a href="{% url 'server-create' pk=service.pk %}">Dodaj nowy</a></p>
-
-<br/>
-<a class="btn btn-outline-secondary" href="#" onclick="javascript:window.history.back(-1);return false;">
-	Powrót
-</a>
+	<div class="row">
+		<div class="col-12 col-md-6">
+			<h4>Usługa {{service.name}}</h4>
+		</div>
+		<div class="col-12 col-md-4 col-lg-2 ml-lg-auto">
+			<a class="nav-link" href="{% url 'server-create' pk=service.pk %}"><button class="btn btn-outline-primary" type="submit">Dodaj nowy</button></a>
+		</div>
+	</div>
+	<ul class="list-group list-group-flush">
+		{% for server in object_list %}
+			<li class="list-group-item">
+				<div class="row">
+					<div class="col-12 col-md-5 my-auto">
+						<a class="text-dark" href="{% url 'server' pk1=server.service.id pk2=server.id %}">{{server.address}}</a>
+					</div>
+					<div class="col-7">
+						<div class="btn-group" role="group" aria-label="Basic example">
+							<a class="nav-link" href="{% url 'server' pk1=server.service.id pk2=server.id %}"><button class="btn btn-outline-primary" type="submit">Pokaż</button></a>
+							<a class="nav-link" href="{% url 'server-update' pk1=server.service.id pk2=server.id %}"><button class="btn btn-outline-dark" type="submit">Edytuj</button></a>
+							<a class="nav-link" href="{% url 'server-delete' pk1=server.service.id pk2=server.id %}"><button class="btn btn-outline-dark" type="submit">Usuń</button></a>
+						</div>
+					</div>
+				</div>
+			</li>
+		{% endfor %}
+	</ul>
 
 {% endblock %}

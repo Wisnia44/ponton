@@ -2,21 +2,11 @@
 
 {% block content %}
 
-<section style="margin-top: 5%;">
-
-	<form action='.' method='POST'>{% csrf_token %}
-		
-		<h4>Podaj szczegóły nowej usługi:</h4>
-		<br/>
+	<h4>Podaj szczegóły nowej usługi</h4>
+	<form action='.' method='POST'>{% csrf_token %}	
+			
 		{{ form.as_p }}
-		<input class="btn btn-success" type='submit' value='Zapisz' />
+		<input class="btn btn-outline-success" type='submit' value='Zapisz' />
 	</form>
-
-</section>
-
-<br/>
-<a class="btn btn-outline-secondary" href="#" onclick="javascript:window.history.back(-1);return false;">
-	Powrót
-</a>
-
+	
 {% endblock %}
