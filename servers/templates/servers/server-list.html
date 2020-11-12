@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+<h5> Usługa {{service.name}}</h5>
 {% for server in object_list %}
 	<p>{{server.id}} - {{ server.address }}
 		<a href="{% url 'server' pk1=server.service.id pk2=server.id %}">Pokaż</a>
@@ -9,6 +9,8 @@
 		<a href="{% url 'server-delete' pk1=server.service.id pk2=server.id %}">Usuń</a>
 	</p>
 {% endfor %}
+
+<p><a href="{% url 'server-create' pk=service.pk %}">Dodaj nowy</a></p>
 
 <br/>
 <a class="btn btn-outline-secondary" href="#" onclick="javascript:window.history.back(-1);return false;">

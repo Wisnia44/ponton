@@ -18,6 +18,7 @@ class Service(models.Model):
 		)
 	name = models.CharField(max_length=15)
 	request_counter = models.IntegerField(default=0)
+	last_round_server_id = models.IntegerField(default=0)
 
 	def get_absolute_url(self):
 		return reverse("service", kwargs={"pk": self.pk})

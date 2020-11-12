@@ -133,5 +133,7 @@ class ServerListView(ListView):
 	def get_context_data(self, **kwargs):
 		context = super(ServerListView, self).get_context_data(**kwargs)
 		server = Server.objects.filter(service=self.kwargs['pk'])
+		service = Service.objects.get(pk=self.kwargs['pk'])
 		context['server'] = server
+		context['service'] = service
 		return context

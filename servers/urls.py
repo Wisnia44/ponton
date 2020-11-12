@@ -33,5 +33,5 @@ urlpatterns = [
     
     # api view
     #path('service/<int:pk>/api', ServiceApiView.as_view(), name='service-api'),
-    url(r'^api/servers/', include('servers.api.urls', namespace='api')),
+    path('api/', include('servers.api.urls')),
 ]
