@@ -18,7 +18,7 @@ Rok: 2020
 1. Sklonuj repozytorium za pomocą polecenia: `$git clone https://github.com/Wisnia44/ponton.git`;
 2. Przejdź do katalogu ponton: `$cd ponton`;
 3. Zbuduj obraz dockera: `$docker build -t ponton .`;
-4. Uruchom kontener: `$docker-compose up`;
+4. Uruchom kontener: `$docker-compose up -d`;
 5. Serwer jest uruchomiony!
 
 

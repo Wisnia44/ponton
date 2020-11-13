@@ -28,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
 	'0.0.0.0',
+    'web',
 ]
 
 
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
 
     'django_crontab',
     'rest_framework',
+    'rest_framework.authtoken',
 
     'django.contrib.admin',
     'django.contrib.contenttypes',

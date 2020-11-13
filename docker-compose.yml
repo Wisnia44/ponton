@@ -16,3 +16,13 @@ services:
       - "8000:8000"
     depends_on:
       - db
+  testserver:
+    build:
+      context: .
+      dockerfile: testserver/Dockerfile
+    ports:
+      - "33303:33303"
+    volumes:
+      - ./testserver:/code
+    links: 
+      - web
