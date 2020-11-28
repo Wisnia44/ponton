@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django_crontab',
     'rest_framework',
     'rest_framework.authtoken',
+    'drf_yasg',
 
     'django.contrib.admin',
     'django.contrib.contenttypes',
