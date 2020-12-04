@@ -4,8 +4,9 @@ from django.contrib.auth.models import User
 
 from django.shortcuts import render, redirect, get_list_or_404
 from django.contrib.auth import logout, login, authenticate, update_session_auth_hash
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.core.exceptions import ValidationError
+from django.http import HttpResponseRedirect
 
 from django.contrib.auth.forms import (
 	UserCreationForm, 
@@ -23,20 +24,6 @@ from django.views.generic import (
 from .forms import UserUpdateForm
 
 # User based views
-class UserLoginView (View):
-	template_name = 'loadbalancer/user_login.html'
-	def post (self, request, *args, **kwargs):
-		form = AuthenticationForm(data=request.POST)
-		if form.is_valid():
-			user = form.get_user()
-			login(request, user)
-			return redirect('home')
-		else:
-			return redirect('unlogged')
-	def get (self, request, *args, **kwargs):
-		form = AuthenticationForm()
-		return render(request, self.template_name, {'form': form})
-
 class UserLogoutView (View):
 	def post (self, request, *args, **kwargs):
 		logout(request)
@@ -70,23 +57,43 @@ class UserDeleteView (DeleteView):
 		user.delete()
 		return redirect('home') 
 
-class UserSignupView (View):
-	template_name = 'loadbalancer/user_signup.html'
+class UserSignupView (CreateView):
+	template_name = 'registration/signup.html'
+	form_class = UserCreationForm
+	#success_url = reverse('index')
+	def get_success_url(self):
+		return reverse_lazy('home')
+
 	def post (self, request, *args, **kwargs):
 		form = UserCreationForm(request.POST)
 		if form.is_valid():
-			form.save()
-			username = form.cleaned_data.get('username')
-			raw_password = form.cleaned_data.get('password1')
-			user = authenticate(username=username, password=raw_password)
-			login(request, user)
-			return redirect('home')
+			new_user = form.save()
+			new_user = authenticate(username=form.cleaned_data['username'],
+				password=form.cleaned_data['password1'],
+				)
+			login(request, new_user)
+			return HttpResponseRedirect("/home/")
 		else:
-			return redirect('unlogged')
+			return HttpResponseRedirect("/signup2/")
 
-	def get (self, request, *args, **kwargs):
-		form = UserCreationForm()
-		return render(request, self.template_name, {'form': form})
+class UserSignupView2 (CreateView):
+	template_name = 'registration/signup2.html'
+	form_class = UserCreationForm
+	#success_url = reverse('index')
+	def get_success_url(self):
+		return reverse_lazy('home')
+
+	def post (self, request, *args, **kwargs):
+		form = UserCreationForm(request.POST)
+		if form.is_valid():
+			new_user = form.save()
+			new_user = authenticate(username=form.cleaned_data['username'],
+				password=form.cleaned_data['password1'],
+				)
+			login(request, new_user)
+			return HttpResponseRedirect("/home/")
+		else:
+			return HttpResponseRedirect("/signup2/")
 
 class UserChangePassword(View):
 	template_name = 'loadbalancer/user_change_password.html'
@@ -108,5 +115,10 @@ class UserUnloggedView(View):
 #Main views
 class HomeView (View):
 	template_name = 'loadbalancer/home.html'
+	def get(self, request, *args, **kwargs):
+		return render(request, self.template_name, {})
+
+class HelpView (View):
+	template_name = 'loadbalancer/help.html'
 	def get(self, request, *args, **kwargs):
 		return render(request, self.template_name, {})

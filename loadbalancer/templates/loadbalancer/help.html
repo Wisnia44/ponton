@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+	<h4>Pomoc aplikacji Ponton</h4>
+	<footer class="footer text-left">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<h5 class="font-weight-normal">Konfiguracja aplikacji</h5>
+					<p class="font-weight-light">
+						Aby zacząć korzystać z mechanizmu równoważenia obciążenia należy skonfigurować usługę. Usługa to w najprostszym rozumieniu wydzielona część mechanizmu odpowiadająca za jedno określone przekierowanie. Dla przykładu jeżeli chcesz przekierowywać użytkowników do galerii zdjęć na różne serwery nazwij swoją usługę "Galeria zdjęć".
+					</p>
+					<p class="font-weight-light">
+						Konfiguracja usługi polega na nadaniu nazwy oraz wybraniu odpowiedniego algorytmu, za pomocą którego system będzie rozdysponowywał obciążenie pomiędzy serwery. Do wyboru masz 3 algorytmy:
+						<ul>
+							<li>
+								<b>Algorytm Round Robin</b> - przydziela użytkownikowi dostęp do "kolejnego" serwera. Każda prośba o zasób oznacza zmianę przydzielonego serwera. Podstawowe lecz sprawdzone i skuteczne rozwiązanie;
+							</li>
+							<li>
+								<b>Algorytm Smallest Ping</b> - przydziela użytkownikowi dostęp do serwera, do którego aplikacja uzyskała najkrótszy czas ping. Pozwala wyeliminować sytuację, w której użytkownik dostanie dostęp do serwera, który tymczasowo nie działa;
+							</li>
+							<li>
+								<b>Algorytm Smallest CPU Usage</b> - algorytm dla zaawansowanych użytkowników. Wymaga korzystania z oferowanego API w celu przesyłania okresowo informacji o stanie każdego z serwerów. Przydziela dostęp do serwera o najmniejszym zużyciu zasobów jednostki.
+							</li>
+						</ul>
+					</p>
+					<p class="font-weight-light">
+						Następnie należy skonfigurować serwery danej usługi- czyli tak naprawdę wystarczy podać adresy, pod którymi są dostępne.
+					</p>
+					<p class="font-weight-light">
+						Kolejny krok to ustawienie przekierowania po Twojej stronie - wszędzie gdzie chcesz przekierować swojego użytkownika do mechanizmu równoważącego obciążenie musisz podać adres aplikacji <i>http://0.0.0.0:8000/api/service/{id_usługi}/</i>.
+					</p>
+					<p class="font-weight-light">
+						Jeżeli wybrałeś jeden z dwóch pierwszych wymienionych algorytmów równoważenia obciążenia - to wszystko. Twój mechanizm powinien już działać. Jeżeli chcesz skorzystać z algorytmu <i>Smallest CPU Usage</i> powinieneś zapoznać się z dokumentacją udostępnianego API dostępną w różnych formatach: <a href="{% url 'schema-redoc' %}">Dokumentacja Redoc</a>, <a href="{% url 'schema-swagger-ui' %}">Dokumentacja Swagger</a>, <a href="{% url 'schema-json' format='.json' %}">Dokumentacja Swagger JSON</a>, <a href="{% url 'schema-json' format='.yaml' %}">Dokumentacja Swagger YAML</a>. 
+					</p>
+					<p class="font-weight-light">
+						Aby ułatwić Ci korzystanie z API zajrzyj do przykładowego kodu w Pythonie integrującego serwer z aplikacją Ponton:
+					</p>
+
+					<pre class="pre-scrollable"><code>
+	import requests
+	import time
+	from timeloop import Timeloop
+	from datetime import timedelta
+	import psutil
+	import json
+
+	tl = Timeloop()
+	time_interval_in_seconds = 60
+
+	login_data = {"username": "user","password": "WzkW49JLNNEave9"}
+	response_login = requests.post("http://web:8000/api/auth-get-token/", data=login_data)
+	token = response_login.json()
+
+	@tl.job(interval=timedelta(seconds=time_interval_in_seconds))
+	def check_and_report_cpu_state():
+		cpu_state = psutil.cpu_percent()
+		address = "http://web:8000/api/server/1/"
+		data = {
+		  	 "cpu_state": cpu_state
+			}
+		data["token"] = token["token"]
+		data_json = json.dumps(data)
+		response = requests.post(address, json=data_json)
+		return jsonify(response.json())
+
+	if __name__ == '__main__':
+		tl.start(block=True)
+</code></pre>
+			</div>
+		</div>
+	</footer>
+
+{% endblock %}

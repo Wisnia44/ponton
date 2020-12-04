@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+	<form class="create-account log-in-form " method="POST">
+		<h4 class="description">Zarejestruj się</h4>
+		{% csrf_token %}
+		<table>
+      		<tr>
+        		<td>Nazwa użytkownika: </td>
+		        <td>{{ form.username }}</td>
+		    </tr>
+	        <tr>
+    		    <td>Hasło: </td>
+    		    <td>{{ form.password1 }}</td>
+ 	        </tr>
+     		<tr>
+        		<td>Powtórz hasło: </td>
+        		<td>{{ form.password2 }}</td>
+      		</tr>
+      	</table>
+      	<br/>
+      	<input type="submit" value="Utwórz konto" class="btn btn-success">
+	</form>
+
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <section class="log-in-form">
+    <h4 class="description">Zaloguj się</h4>
+    {% if form.errors %}
+      <div class="alert alert-secondary" role="alert">
+        Podałeś niepoprawny login lub hasło- spróbuj jeszcze raz.
+      </div>
+    {% endif %}
+
+    <form class="create-account" method="POST">
+      {% csrf_token %}
+      <table>
+      <tr>
+        <td>Nazwa użytkownika: </td>
+        <td>{{ form.username }}</td>
+      </tr>
+      <tr>
+        <td>Hasło: </td>
+        <td>{{ form.password }}</td>
+      </tr>
+      </table>
+      <br/>
+      <input type="submit" value="Zaloguj się" class="btn btn-success">
+      <br/><br/>
+      <small>
+        <p><a href="{% url 'signup' %}">Nie masz konta? Zarejestruj się</a></p>
+        <p><a href="{% url 'password_reset' %}">Nie pamiętasz hasła?</a></p>
+      </small>
+    </form>
+  </section>
+  
+{% endblock %}

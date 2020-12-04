@@ -5,18 +5,20 @@
 	{% if user.is_authenticated %}
 		<h4>Witamy w aplikacji Ponton</h4>
 		<p>Aplikacja webowa do konfiguracji mechanizmu równoważenia obciążenia</p>
-		<p class="font-weight-light">{% lorem 2 %}</p>
+		<p class="font-weight-light">
+			Zapraszamy do skorzystania z aplikacji. Skonfiguruj konto, zapoznaj się z instrukcją użytkowania, a następnie w prosty sposób za pomocą przyjaznego użytkownikom interfejsu skonfiguruj swoją pierwszę usługę wraz z przynależącymi do niej serwerami i ciesz się darmowym mechanizmem równoważenia obciążenia!
+		</p>
 	{% else %}
 		<footer class="footer text-left">
 			<div class="container">
 				<div class="row">
 					<div class="col-sm">
 						<h4 class="font-weight-normal">Jak to działa?</h4>
-						<p class="font-weight-light">{% lorem 2 %}</p>
+						<p class="font-weight-light">Aplikacja Ponton dostarcza mechanizm równoważenia obciążenia wraz z interfejsem webowym do jego konfiguracji. Podczas konfiguracji usługi użytkownik może wybrać jeden z trzech algorytmów równoważenia obciążenia. Konfiguracja dwóch z nich dzięki intuicyjnemu, przyjaznemu użytkownikowi interfejsowi, a także <a href="{% url 'help' %}">rozbudowanej instrukcji użytkowania</a> pozwala na konfigurację oraz użytkowanie aplikacji nawet przez osoby niemające szerokiej wiedzy dotyczącej informatyki, a w szczególności architektury sieciowej. Dzięki udostępnianemu API zaawansowani użytkownicy mogą zintegrować swoje zasoby z aplikacją oraz korzystać z mechanizmu równoważenia obciążenia bazującego na ciągle aktualizowanej informacji o stanie serwerów. Aby korzystać z aplikacji wystarczy założyć konto nawet bez podawania adresu email! Należy pamiętać jednak, że wcześniejsze podanie adresu email jest niezbędne do skorzystania z funkcjonalności przypominania hasła.
 					</div>
 					<div class="col-sm">
 						<h4 class="font-weight-normal">O mnie:</h4>
-						<p class="font-weight-light">{% lorem 1 %}</p>
+						<p class="font-weight-light">Nazywam się Tomasz Wiśniewski i jestem studentem 7 semestru studiów inżynierskich Inżynierii Systemów na Politechnice Wrocławskiej. W ramach swojej pracy inżynierskiej zatytułowanej "Mechanizm równoważenia obciążenia dla usług webowych z interfejsem webowym do jego konfiguracji" stworzyłem aplikację webową Ponton.</p>
 					</div>
 				</div>
 			</div>
