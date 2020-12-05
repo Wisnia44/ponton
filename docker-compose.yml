@@ -7,7 +7,7 @@ services:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-  web:
+  django:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
@@ -16,13 +16,3 @@ services:
       - "8000:8000"
     depends_on:
       - db
-  testserver:
-    build:
-      context: .
-      dockerfile: testserver/Dockerfile
-    ports:
-      - "33303:33303"
-    volumes:
-      - ./testserver:/code
-    links: 
-      - web
