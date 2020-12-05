@@ -12,5 +12,4 @@ class ServerModelForm(forms.ModelForm):
     class Meta:
         model = Server
         fields = ['address',
-        	'analysis_method',
         	]

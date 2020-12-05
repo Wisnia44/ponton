@@ -27,20 +27,10 @@ class Service(models.Model):
 		return self.owner
 
 class Server(models.Model):
-	address = models.CharField(max_length=15)
+	address = models.CharField(max_length=255)
 	service = models.ForeignKey(Service, on_delete=models.CASCADE)
 	cpu_state = models.FloatField(default=0.5)
 	ping_time = models.FloatField(default=9999.0)
-	analysis_method_choices =[
-		('ping','ping'),
-		('cpu', 'cpu'),
-		]
-	analysis_method = models.CharField(
-		max_length=4, 
-		choices=analysis_method_choices, 
-		default='ping'
-		)
 
-	def get_owner(self):
-		#obj = Service.objects.get(pk=self.service)
-		return service.owner
+	def get_service(self):
+		return Service.objects.get(pk=self.service)
