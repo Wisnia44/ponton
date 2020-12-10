@@ -1,12 +1,19 @@
 version: "3.7"
    
 services:
+  redis:
+    image: redis:alpine
   db:
     image: postgres
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+  django_migrations:
+    build: .
+    command: python manage.py migrate
+    depends_on:
+      - db
   django:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
@@ -14,5 +21,32 @@ services:
       - .:/code
     ports:
       - "8000:8000"
+    environment:
+      - DEBUG=1
+      - SECRET_KEY=pingpongomaster
+      - DJANGO_ALLOWED_HOSTS=django 0.0.0.0 [::1]
     depends_on:
-      - db
+      - redis
+      - django_migrations
+  celery:
+    build: .
+    command: celery -A ponton worker -l INFO
+    volumes:
+      - ./project/:/usr/src/app/
+    environment:
+      - DEBUG=1
+      - SECRET_KEY=pingpongomaster
+      - DJANGO_ALLOWED_HOSTS=django 0.0.0.0 [::1]
+    depends_on:
+      - django
+  celery-beat:
+    build: .
+    command: celery -A ponton beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    volumes:
+      - ./project/:/usr/src/app/
+    environment:
+      - DEBUG=1
+      - SECRET_KEY=pingpongomaster
+      - DJANGO_ALLOWED_HOSTS=django 0.0.0.0 [::1]
+    depends_on:
+      - celery

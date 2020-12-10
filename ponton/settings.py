@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '=$6_7y^^)3-p6@a*5ogn_b+9vjnoys$$_slwizznx@%m!v)pt%'
+SECRET_KEY = 'pingpongomaster'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'drf_yasg',
+    'django_celery_beat',
 
     'django.contrib.admin',
     'django.contrib.contenttypes',
@@ -165,4 +166,18 @@ REST_FRAMEWORK = {
         #'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     ),
+}
+
+CELERY_BROKER_URL = "redis://redis:6379"
+CELERY_RESULT_BACKEND = "redis://redis:6379"
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TIMEZONE = 'Europe/Oslo'
+CELERY_ENABLE_UTC = True
+CELERY_BEAT_SCHEDULE = {
+    "ping_servers": {
+        "task": "ping_servers",
+        "schedule": 60,
+    },
 }
