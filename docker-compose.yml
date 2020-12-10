@@ -22,7 +22,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - DEBUG=1
+      - DEBUG=0
       - SECRET_KEY=pingpongomaster
       - DJANGO_ALLOWED_HOSTS=django 0.0.0.0 [::1]
     depends_on:
@@ -34,7 +34,7 @@ services:
     volumes:
       - ./project/:/usr/src/app/
     environment:
-      - DEBUG=1
+      - DEBUG=0
       - SECRET_KEY=pingpongomaster
       - DJANGO_ALLOWED_HOSTS=django 0.0.0.0 [::1]
     depends_on:
@@ -45,7 +45,7 @@ services:
     volumes:
       - ./project/:/usr/src/app/
     environment:
-      - DEBUG=1
+      - DEBUG=0
       - SECRET_KEY=pingpongomaster
       - DJANGO_ALLOWED_HOSTS=django 0.0.0.0 [::1]
     depends_on:
