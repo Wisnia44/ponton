@@ -29,7 +29,9 @@ services:
       - redis
       - django_migrations
   celery:
-    build: .
+    build: 
+      context: .
+      dockerfile: celery/Dockerfile
     command: celery -A ponton worker -l INFO
     volumes:
       - ./project/:/usr/src/app/
